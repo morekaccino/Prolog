@@ -1,0 +1,179 @@
+%% ----------------------------------------------------------
+
+%% EECS 3401 Fall 2020 Assignment 2 
+
+%% Family name: 
+
+%% Given name: 
+
+%% Student number: 
+
+
+
+%%    Answers to Questions 6-10
+
+%% Instructions: 
+
+%% Please edit this file in the following way to answer the text
+%% questions of Assignment 1. 
+
+%% - Please replace any occurence of '[yes/no]' with either 'yes' or
+%% 'no' to answer the respective question.
+
+%% - Replace any occurence of '[explain N words]' or '[if yes (resp.
+%%   no), explain N words]' with an explanation containing no more
+%%   than N words if the condition (yes/no) applies to your previous
+%%   answer.
+
+%% - Do not remove any other lines, in particular do not remove the
+%%   task-tags (<tasknumber>)
+
+%% - Any line starting with a '%' will be ignored.
+
+%% - Submit this file electronically.
+
+%% ----------------------------------------------------------
+
+
+
+%% 6. Which of the four heuristics are admissible?
+
+%%  - hfn_null
+<6.1>
+yes
+
+%%  - hfn_misplaced
+<6.2>
+yes
+
+%%  - hfn_manhattan
+<6.3>
+yes
+
+%%  - hfn_inversions
+<6.4>
+no
+
+
+
+
+%% /* ------------------------------------------------------ */
+
+% 7. Suppose for sliding a tile to the left we would change the
+% cost from 1 to 0.5 and leave all the other moves the same cost.
+% Does this affect the admissibility of the heuristics? Which of
+% them are admissible now?
+
+
+%%  - hfn_null
+<7.1.1>
+yes
+
+<7.1.2>
+[if no explain in 100 words or less]
+
+
+%%  - hfn_misplaced
+<7.2.1>
+no
+
+<7.2.2>
+If the solution path contains any left movement, since the cost of left movement decreased, h* also decreases, and it will be greater than h, h(n)>h*(n), which is in contrast to the definition of admissibility. For instance, in the state [1 2 3 x 4 5 7 8 6], the displacement is 3, however, the solution path is [left, left, up], which is 0.5+0.5+1 = 2, since 3>2, meaning h(n)>h*(n), It is not admissible.
+
+
+%%  - hfn_manhattan
+<7.3.1>
+no
+
+<7.3.2>
+If the solution path contains any left movement, since the cost of left movement decreased, h* also decreases, and it will be greater than h, h(n)>h*(n), which is in contrast to the definition of admissibility. For instance, in the state [1 2 3 x 4 5 7 8 6], the manhattan distance is 3, however, the solution path is [left, left, up], which is 0.5+0.5+1 = 2, since 3>2, meaning h(n)>h*(n), It is not admissible.
+
+
+%%  - hfn_inversions
+<7.4.1>
+no
+
+<7.4.2>
+If the solution path contains any left movement, since the cost of left movement decreased, h* also decreases, and it will be greater than h, h(n)>h*(n), which is in contrast to the definition of admissibility. For instance, in the state [1 2 3 4 x 5 7 8 6], the inversion is 2, however, the solution path is [left, up], which is 0.5+1 = 1.5, since 2>1.5, meaning h(n)>h*(n), It is not admissible.
+
+
+
+%% /* ------------------------------------------------------ */
+
+% 8. Now suppose we would change the cost for sliding a tile to the
+% left to 2 and leave all the other moves the same cost. Does this
+% now affect the admissibility of the four heuristics? Again, which
+% of them are admissible?
+
+%%  - hfn_null
+<8.1.1>
+yes
+
+<8.1.2>
+[if no explain in 100 words or less]
+
+
+%%  - hfn_misplaced
+<8.2.1>
+yes
+
+<8.2.2>
+[if no explain in 100 words or less]
+
+
+%%  - hfn_manhattan
+<8.3.1>
+yes
+
+<8.3.2>
+[if no explain in 100 words or less]
+
+
+%%  - hfn_inversions
+<8.4.1>
+no
+
+<8.4.2>
+Let's disprove it using an example: in the state [1 2 3 4 5 x 7 8 6], the inversion is 2, however, the solution path is [up], which is 1, since 2>1, meaning h(n)>h*(n), It is not admissible by the definition of admissibility.
+
+
+
+%% /* ------------------------------------------------------ */
+
+% 9. In the former modification (sliding to the LEFT costs 0.5), can
+% you say for sure which heuristic will be the fastest (expand the
+% least number of states) in finding a (not necessary optimal)
+% solution? Explain.
+<9.1>
+yes
+
+<9.2>
+Since we're not concerned about the optimal solution, and we only need to find the fastest solution, we are not going to take admissibility into account. We focus only on the dominance of the functions. among all the four functions, Manhattan dominates all of them. So by the def of dominance, the average number of paths expanded in Manhattan functions are fewer than others, therefore, we reach "an" answer "faster".
+
+%% /* ------------------------------------------------------ */
+
+% 10. One can obtain another heuristic for the N-puzzle by relaxing the
+% problem as follows: let's say that a tile can move from square A to
+% square B if B is blank.  The exact solution to this problem defines
+% Gaschnig's heuristic. Explain why Gaschnig's heuristic is at
+% least as accurate as hfn_misplaced.  Show some cases where it
+% is more accurate than both the hfn_misplaced} and 
+% hfn_manhattan} heuristics.  Can you suggest a way to calculate
+% Gaschnig's heuristic efficiently?
+
+<10.1>
+In Gaschnig, we can only move a tile to the blank spot. If the blank spot is where the tile is supposed to be, then the result is equal to misplacement. However, if the goal position of a tile is not empty (blank), we need at least 2 moves, to put the tile in its true position. In contrast, misplaced heuristic only counts the number of misplacement, which is always 1 for every misplacement. Because of that Gaschnig's heuristic is always greater than or equal to the misplaced-tile one. Since they're both admissible, Gaschnig’s heuristic is more accurate.
+
+<10.2>
+if we swap any 2 adjacent tiles in the goal state, we reach a state in which Gaschnig's heuristic yields a greater result than misplaced-tile and Manhattan heuristic. For instance, in [1 2 3 4 5 6 8 7 x], the misplacement is 2 (7 and 8), and the Manhattan is also 2 (7 and 8 each has 1 tile to get to their position), however, Gaschnig's heuristic is 3 (swap(7,x), swap(x,8), swap(x,7), which is 3 swaps, therefore 3). 3 > 2 then this is an example where Gaschnig's heuristic is greater than misplacement and Manhattan.
+
+<10.3>
+moves = 0
+while goal state is not reached:
+	P = position of x (blank)
+	if in the goal state P is occupied by any tile T and T is not blank:
+		move T to P
+	else:
+		choose a misplaced tile T, and move T to P (blank)
+	moves += 1
+end while
