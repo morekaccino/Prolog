@@ -1,0 +1,52 @@
+?- solPartB(S), executable(S).
+S = do(push(box2, door2Loc, room2centre), do(push(box2, door1Loc, door2Loc), do(push(box2, initBox2Loc, door1Loc), do(go(door1Loc, initBox2Loc), do(go(door3Loc, door1Loc), do(go(initShakeyLoc, door3Loc), s0)))))) .
+
+
+
+
+
+?- do(getBox2toRoom2, s0, S), executable(S), show_act_seq(S).
+go(initShakeyLoc,door3Loc)
+go(door3Loc,door1Loc)
+go(door1Loc,initBox2Loc)
+push(box2,initBox2Loc,door1Loc)
+push(box2,door1Loc,door2Loc)
+push(box2,door2Loc,room2centre)
+S = do(push(box2, door2Loc, room2centre), do(push(box2, door1Loc, door2Loc), do(push(box2, initBox2Loc, door1Loc), do(go(door1Loc, initBox2Loc), do(go(door3Loc, door1Loc), do(go(initShakeyLoc, door3Loc), s0)))))) .
+
+
+
+
+
+
+?- do(allLightsOn, s0, S), executable(S), show_act_seq(S).
+go(initShakeyLoc,door3Loc)
+go(door3Loc,door1Loc)
+go(door1Loc,initBox1Loc)
+push(box1,initBox1Loc,door1Loc)
+push(box1,door1Loc,door2Loc)
+push(box1,door2Loc,sw2Loc)
+climbUp(box1)
+turnOn(sw2)
+climbDown(box1)
+push(box1,sw2Loc,door2Loc)
+push(box1,door2Loc,door3Loc)
+push(box1,door3Loc,sw3Loc)
+climbUp(box1)
+turnOn(sw3)
+S = do(turnOn(sw3), do(climbUp(box1), do(push(box1, door3Loc, sw3Loc), do(push(box1, door2Loc, door3Loc), do(push(box1, sw2Loc, door2Loc), do(climbDown(box1), do(turnOn(sw2), do(climbUp(box1), do(push(..., ..., ...), do(..., ...)))))))))) .
+
+
+
+
+
+
+?- do(idPlan(10), s0, S), executable(S),show_act_seq(S).
+go(initShakeyLoc,door3Loc)
+go(door3Loc,door1Loc)
+go(door1Loc,initBox2Loc)
+push(box2,initBox2Loc,door1Loc)
+push(box2,door1Loc,door2Loc)
+S = do(push(box2, door1Loc, door2Loc), do(push(box2, initBox2Loc, door1Loc), do(go(door1Loc, initBox2Loc), do(go(door3Loc, door1Loc), do(go(initShakeyLoc, door3Loc), s0))))) .
+
+?- 
